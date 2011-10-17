@@ -1,0 +1,80 @@
+
+ * + /hardlink/ aspect: cp -rs becomes cp -rl but underneath
+ * + merge tags - either rename or /relations/equal
+ * + readonly browser: /minimaltags/ - /mintags/a/ lists tag-b only if exists /a/b/someitems
+ *   easy-add-tag: configurable "mv /tags/a/x /tags/b/c/" to only add right-side or to also remove left-side
+ * + /relations/includes
+ *   /autojpg-year
+
+user-spec: What is done How. e.g.
+ - make tag t       :  mkdir /tags/t      or  touch /tags/t
+ - del  tag t       :  rmdir /tags/t      or  rm /tags/t
+ - make tags t1,t2  :  mkdir -p /tags/t1/t2  (or touch /tags/t1/t2 ???)
+ - del  tags t1,t2  :  rmdir /tags/t1/t2, rm /tags/t1/t2    ??????
+
+ - import external items
+    (ln /ext/item internal...     WILL NOT WORK - across filesystems)
+    (mv /ext/item internal...     WILL copy+remove - across filesystems
+    (... so use ln -s into /hardlink/)
+    ln -s /ext/item /hardlink/archive/       : becomes hardlink
+    ln -s /ext/item /hardlink/tags/t1        : becomes hardlink + tags item with t1
+    ln -s /ext/item /archive/                : becomes symlink
+    ln -s /ext/item /tags/t1                 : becomes symlink + tags item with t1
+    cp -rs /ext/item/dirs /hardlink/tags/    
+        : dirs => tags, (flat) items => symlinks to ext-tree
+    cp -rs /ext/item/dirs /hardlink/archive/ 
+        : dirs => dirs, (tree) items =? symlinks to ext-tree.. is this usable/needed??
+
+ - del item (and untag)
+    rm /archive/item    ???
+    mv /query/to/item into-what? /dev/null? ???
+
+ - add tags to items:   
+    (ext items: see import above)
+    ln /query/to/item /tags/t2/t3/t4
+    mv /query/to/item /tags/t2/t3/t4    (easy-add-tag-variant)
+    ln -s /query/to/item /tags/t2/t3/t4  ??????
+
+ - del tags t1,t2 from item:   
+    rm /tag/t1/t2/item
+    mv /tag/t1/t2/item /archive     ??
+
+ - del all tags from item:   
+    rm /item2tags/item/*
+    mv /query/to/item /untagall     ??
+
+ - rename item  : 
+    mv /archive/item /archive/item2         with subpaths if any
+    mv /query/to/item /same/query/to/item2  ?? no subpaths
+    mv /query/to/item /archive/item2  ???   isnt this a del-all-tags?
+    mv /query/to/item /rename/item2  ???   or maybe this?
+
+ - rename tag   : 
+    mv /tag/t1 /tag/t3
+    or, tag--relation-equals
+
+ - re-tag items, e.g. a/b/c/* to become /abc/ or ab/* to become a/b/
+    ln or mv   (neither works now)
+    or, some tags-relation-operation - todo
+
+any filesystem oper that seems dubious should be disallowed
+e.g. probably ln -s should only be allowed to import items in /hardlink, nowhere else
+same for various mv that may mean this or that - provide clear /aspects and disallow mv elsewhere
+
+
+usual usecase:
+    mass import (cp -rs /ext* /hardlink/)
+    re-tagging (a->b, a/b/->ab, ab->a/b/)
+    browse (/mintags/)
+
+
+more to do:
+define a special symbol for "root" which changes the parser.
+makes it possible to run one aspect's query using other's aspect 
+parser to address operands. 
+
+tag rels should affect the way tags are filtered in 'tags' aspect.
+
+metatags aspect
+
+# vim:ts=4:sw=4:expandtab

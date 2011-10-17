@@ -1,0 +1,32 @@
+
+====== Archive
+mkdir name                  - create directory object
+rmdir name                  - remove directory object and it's tagging info
+rm path/obj                 - remove object and it's tagging info
+
+ln ext name                 - create object as hard link to an EXTERNAL object
+ln obj1 obj2                - NOT_IMPLEMENTED create object as hard link to existing object
+ln -s name1 name2           - create object called name2 as symlink to name1
+
+mv ext path                 - TODO
+mv ofile name               - rename an existing object preserving it's tagging info
+mv ofile odir               - TODO 
+
+
+====== Tags
+mkdir name                  - create tag
+rmdir name                  - remove tag
+rm path/obj                 - untag object using all tags in path
+
+ln ext path                 - archive semantics + set all tags in path 
+ln path1/obj1 path2         - set all tags in path2 to obj1
+ln path1/obj1 path2/obj2    - TODO use archive semantics
+ln -s name path             - create object as symlink to name and set all tags in path to it
+ln -s path1/obj1 path2      - XXX symlink is not good as path1 is relative
+
+mv ext path                 - TODO archive semantics + set all tags in path
+mv path1 path2              - NOT_IMPLEMENTED
+mv path1 name               - TODO rename a tag
+mv path1/obj1 path2         - untag obj1 using all tags in path1 and then tag with all tags in path2
+mv path1/obj1 path2/obj2    - TODO archive semantics
+
