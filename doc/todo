@@ -77,4 +77,6 @@ tag rels should affect the way tags are filtered in 'tags' aspect.
 
 metatags aspect
 
+transaction aspect - control when things are processed in memory and commit/rollback functions.
+
 # vim:ts=4:sw=4:expandtab
