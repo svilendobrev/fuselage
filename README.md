@@ -9,7 +9,7 @@ tag-based semantic file system, in python, over FUSE. Pluggable aspects (parsing
 Fuselage (tagging file system)
 ==============================
 
-== Installation
+## Installation
 
 * Install the dependencies:
   sudo apt-get install python-fuse fuse-utils python-kjbuckets
@@ -51,7 +51,7 @@ config.py.
 * queries - Here the user can save long and complex queries and later call them by just addressing their short names, so he doesn't need to invent them again.
 
 
-== Basic operations (replace leading ./ with actual mount-point path)
+## Basic operations (replace leading ./ with actual mount-point path)
 
 * create tag t
    _mkdir ./tags/t_
@@ -148,7 +148,7 @@ ls queries/Q1
 ls queries
 
 
-== usual usecase
+## usual usecase
 
 * mass import (cp -rs /ext* ./hardlink/<archive|tags>/)
 * re-tagging (a->b, a/b/->ab, ab->a/b/)
